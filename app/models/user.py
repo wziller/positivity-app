@@ -1,6 +1,7 @@
 from .db import db
-from werkzeug.security import generate_password_hash, check_password_hash;
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+
 
 class User(db.Model, UserMixin):
     __tablename__='users'
@@ -12,6 +13,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False)
     hashed_password = db.Column(db.String(50), nullable=False)
     avatar = db.Column(db.String(255), nullable=True)
+
+    # Relationship
+    usersAffirmations = db.Relationship("Affirmation", back_populates="affirmationUser",  cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -32,5 +36,7 @@ class User(db.Model, UserMixin):
             'lastname':self.lastname,
             'email':self.email,
             'hashed_password':self.hashed_password,
-            'avatar':self.avatar
+            'avatar':self.avatar,
+            'affirmations': [usersAffirmation.to_dict() for usersAffirmation in self.usersAffirmations]
+            #  1 affirmation in list of affs
         }
