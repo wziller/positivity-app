@@ -24,6 +24,7 @@ MarkupSafe = "==2.0.1"
 SQLAlchemy = "==1.4.31"
 Werkzeug = "==2.0.3"
 Flask-Login = "==0.5.0"
+psycopg2 = "*"
 
 [dev-packages]
 

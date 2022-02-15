@@ -12,7 +12,7 @@ class Affirmation(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     # Relationship
-    affirmationUser = db.Relationship("User", back_populates="usersAffirmations")
+    affirmationUser = db.relationship("User", back_populates="usersAffirmations")
 
     def to_dict(self) :
         return {

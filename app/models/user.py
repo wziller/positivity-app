@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(255), nullable=True)
 
     # Relationship
-    usersAffirmations = db.Relationship("Affirmation", back_populates="affirmationUser",  cascade="all, delete-orphan")
+    usersAffirmations = db.relationship("Affirmation", back_populates="affirmationUser",  cascade="all, delete-orphan")
 
     @property
     def password(self):
