@@ -8,6 +8,8 @@ class Affirmation(db.Model):
     body = db.Column(db.String(500), nullable=False)
     image_url = db.Column(db.String(255), nullable=True)
     viewed = db.Column(db.Boolean, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        "users.id"), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
