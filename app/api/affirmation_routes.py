@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Affirmation, db
-from app.forms import NewAffForm
+from app.forms.new_aff_form import NewAffForm
 import datetime
 import random
 
@@ -10,14 +10,15 @@ import random
 affirmation_routes = Blueprint('affirmations', __name__)
 
 # GET All Affirmations using userID
-@affirmation_routes.route('/')
-def get_affirmations():
-    affirmations = Affirmation.query.get(current_user.id)
+@affirmation_routes.route('/<int:id>')
+def get_affirmations(id):
+    
+    affirmations = Affirmation.query.get(id)
     return affirmations.to_dict()
 
 # GET One Random Affirmation
 @affirmation_routes.route('/random')
-def get_affirmations():
+def get_random_affirmation():
     viewable_affirmations = Affirmation.query.filter(Affirmation.viewed == False)
 
     if len(viewable_affirmations) == 0:
