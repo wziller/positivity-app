@@ -22,31 +22,25 @@ def get_affirmations(id):
 def get_random_affirmation(id):
 
     viewable_affirmations = list(Affirmation.query.filter(Affirmation.viewed == False and Affirmation.user_id == id))
-   
     if len(viewable_affirmations) == 0:
-        affirmations = Affirmation.query.get()
+        affirmations = list(Affirmation.query.filter(Affirmation.user_id == id))
         for affirmation in affirmations:
             affirmation.viewed = False
-
+            db.session.commit()
+        viewable_affirmations = affirmations
     rand_aff_index = random.randint(0, len(viewable_affirmations) -1)
     randAff = viewable_affirmations[rand_aff_index]
+    randAff.viewed = True
+    db.session.commit()
     return randAff.to_dict()
-    # randAff.viewed = True
-    # return randAff
-
-
-# row = session.query(Table)[rand]
-
-# Query, filter while class instances, convert to dicts and return in dict
-
 
 
 # POST One New Affirmation
 @affirmation_routes.route('/', methods=['POST'])
-
 def create_new_aff():
     form = NewAffForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("hhhhhhhhh",form.validate_on_submit())
     if form.validate_on_submit():
         new_aff = {
             'body': form['body'],
