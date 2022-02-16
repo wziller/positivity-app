@@ -1,17 +1,16 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {useSelector} from 'react-redux'
-import './App.css';
-
+import NavBar from "./components/navbar";
 function App() {
   const user = useSelector(state=> state.session.user)
   return(
     <BrowserRouter>
       <NavBar/>
-      <Switch>
+      <Routes>
         <Route path='/' exact={true}>
-          {user ?  <MainPage/>:<LandingPage/>}
+          {/* {user ?  <MainPage/>:<LandingPage/>} */}
         </Route>
-      </Switch>
+      </Routes>
     </BrowserRouter>
   );
 }
