@@ -12,24 +12,35 @@ affirmation_routes = Blueprint('affirmations', __name__)
 # GET All Affirmations using userID
 @affirmation_routes.route('/<int:id>')
 def get_affirmations(id):
-    
-    affirmations = Affirmation.query.get(id)
-    return affirmations.to_dict()
+    affirmations = Affirmation.query.filter(Affirmation.user_id == id)
+    return {"affirmations" : [affirmation.to_dict() for affirmation in affirmations]}
+
+
 
 # GET One Random Affirmation
-@affirmation_routes.route('/random')
-def get_random_affirmation():
-    viewable_affirmations = Affirmation.query.filter(Affirmation.viewed == False)
+@affirmation_routes.route('/random/<int:id>')
+def get_random_affirmation(id):
 
+    viewable_affirmations = list(Affirmation.query.filter(Affirmation.viewed == False and Affirmation.user_id == id))
+   
     if len(viewable_affirmations) == 0:
         affirmations = Affirmation.query.get()
         for affirmation in affirmations:
             affirmation.viewed = False
 
-    rand_aff_id = random.randInt(0, len(viewable_affirmations) - 1)
-    randAff = viewable_affirmations.filter(lambda aff: aff.id == rand_aff_id)
-    randAff.viewed = True
+    rand_aff_index = random.randint(0, len(viewable_affirmations) -1)
+    randAff = viewable_affirmations[rand_aff_index]
     return randAff.to_dict()
+    # randAff.viewed = True
+    # return randAff
+
+
+# row = session.query(Table)[rand]
+
+# Query, filter while class instances, convert to dicts and return in dict
+
+
+
 # POST One New Affirmation
 @affirmation_routes.route('/', methods=['POST'])
 

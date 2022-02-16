@@ -5,7 +5,7 @@ from datetime import datetime
 
 def seed_affirmations():
     Affirmation1 = Affirmation(
-        body='"I am in the right place at the right time, doing the right thing', image_url='', viewed= False, user_id=1, created_at=datetime.now(), updated_at=datetime.now())
+        body="I am in the right place at the right time, doing the right thing", image_url='', viewed= False, user_id=1, created_at=datetime.now(), updated_at=datetime.now())
     Affirmation2 = Affirmation(
         body="Make way for the unprecedented and watch your reality rearrange yourself", image_url='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/yrsa-daley-ward-1621436133.jpg?crop=1xw:1xh;center,top&resize=980:*', viewed= False, user_id=1, created_at=datetime.now(), updated_at=datetime.now())
     Affirmation3 = Affirmation(
