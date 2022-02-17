@@ -6,9 +6,9 @@ import TextField from "@mui/material/TextField";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
-import { Backdrop } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/session";
+import { Container } from "@mui/material";
 import "./navbar.css";
 
 function SimpleDialog(props) {
@@ -16,7 +16,7 @@ function SimpleDialog(props) {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { onClose, open } = props;
+  const { onClose, open, setSignUpOpen } = props;
 
   const closeLoginModel = () => {
     onClose();
@@ -28,63 +28,74 @@ function SimpleDialog(props) {
     dispatch(loginUser(userEmail, password));
   };
 
+   const LogInSignUpClick = () => {
+     setSignUpOpen(true);
+     onClose();
+   };
+
   return (
     <Dialog open={open}>
-       {/* <Backdrop
+      {/* <Backdrop
         sx={{ color: "primary", zIndex: (theme) => theme.zIndex.drawer - 1 }}
         open={open}
         onClick={closeLoginModel}
         > */}
-        <DialogTitle>Login Into Your Account</DialogTitle>
-          <Box
-            id="login_form"
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit}
+      <DialogTitle>Login Into Your Account</DialogTitle>
+      <Box
+        id="login_form"
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          required
+          id="email-input"
+          label="Email"
+          placeholder="Email"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
+        <TextField
+          required
+          type="password"
+          id="password-input"
+          label="Password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Container id="login_buttons_box">
+          <Button
+            className="login_form_button"
+            size="large"
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={handleSubmit}
           >
-            <TextField
-              required
-              id="username-input"
-              label="Email"
-              placeholder="Email"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-            />
-            <TextField
-              required
-              type="password"
-              id="password-input"
-              label="Password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div id="login_buttons_box">
-              <Button
-                className="login_form_button"
-                size="large"
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Login
-              </Button>
-              <Button
-                className="login_form_button"
-                size="large"
-                variant="contained"
-                onClick={closeLoginModel}
-              >
-                Cancel
-              </Button>
-            </div>
-          </Box>
-        {/* </Backdrop> */}
+            Login
+          </Button>
+          <Button
+            className="login_form_button"
+            size="large"
+            variant="contained"
+            onClick={closeLoginModel}
+          >
+            Cancel
+          </Button>
+        </Container>
+        <Container>
+          Become a member
+          <Button variant="text" onClick={LogInSignUpClick}>
+            Sign Up!
+          </Button>
+        </Container>
+      </Box>
+      {/* </Backdrop> */}
     </Dialog>
   );
 }
@@ -94,14 +105,13 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-export default function LoginButton() {
-  const [open, setOpen] = useState(false);
+export default function LoginButton({ open, setLoginOpen, setSignUpOpen }) {
   const handleClickOpen = () => {
-    setOpen(true);
+    setLoginOpen(true);
   };
 
   const handleClose = (value) => {
-    setOpen(false);
+    setLoginOpen(false);
   };
 
   return (
@@ -111,7 +121,11 @@ export default function LoginButton() {
       <Button variant="contained" onClick={handleClickOpen}>
         Login
       </Button>
-      <SimpleDialog open={open} onClose={handleClose} />
+      <SimpleDialog
+        setSignUpOpen={setSignUpOpen}
+        open={open}
+        onClose={handleClose}
+      />
     </div>
   );
 }
