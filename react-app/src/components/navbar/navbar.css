@@ -30,3 +30,9 @@
 .login_form_button{
     background-color: blueviolet;
 }
+
+
+.profile_buttons_box{
+    display: flex;
+    justify-content: space-evenly;
+}

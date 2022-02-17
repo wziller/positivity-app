@@ -96,7 +96,6 @@ SimpleDialog.propTypes = {
 
 export default function LoginButton() {
   const [open, setOpen] = useState(false);
-  // console.log("OPEn", open)
   const handleClickOpen = () => {
     setOpen(true);
   };
