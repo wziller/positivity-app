@@ -29,14 +29,13 @@ function SimpleDialog(props) {
   };
 
   return (
-    <Backdrop
-      sx={{ color: "primary", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={open}
-      onClick={closeLoginModel}
-    >
-      <Dialog open={open}>
+    <Dialog open={open}>
+       {/* <Backdrop
+        sx={{ color: "primary", zIndex: (theme) => theme.zIndex.drawer - 1 }}
+        open={open}
+        onClick={closeLoginModel}
+        > */}
         <DialogTitle>Login Into Your Account</DialogTitle>
-        <form>
           <Box
             id="login_form"
             component="form"
@@ -85,9 +84,8 @@ function SimpleDialog(props) {
               </Button>
             </div>
           </Box>
-        </form>
-      </Dialog>
-    </Backdrop>
+        {/* </Backdrop> */}
+    </Dialog>
   );
 }
 
