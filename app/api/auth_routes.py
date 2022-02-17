@@ -3,6 +3,11 @@ from app.models import User, db
 from app.forms.user_login_form import LoginForm
 from app.forms.user_signup_form import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+# from app.__init__ import csrf
+# from flask_wtf.csrf import CSRFProtect
+
+
+# csrf = CSRFProtect(app)
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -21,7 +26,9 @@ def authenticate():
     return {'errors':['Unauthorized']}, 401
 
 @auth_routes.route('/login', methods=['POST'])
+
 def login():
+    print("------->")
     form = LoginForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

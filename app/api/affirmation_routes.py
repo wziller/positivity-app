@@ -39,13 +39,14 @@ def get_random_affirmation(id):
 @affirmation_routes.route('/', methods=['POST'])
 def create_new_aff():
     form = NewAffForm()
+    print("!!!!!!", form)
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("hhhhhhhhh",form.validate_on_submit())
+    
     if form.validate_on_submit():
         new_aff = {
-            'body': form['body'],
-            'image_url': form['image_url'],
-            'viewed': form['viewed'],
+            'body': form.data['body'],
+            'image_url': form.data['image_url'],
+            'viewed': False,
             'created_at': datetime.now(),
             'updated_at': datetime.now()
         }
