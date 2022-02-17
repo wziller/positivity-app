@@ -1,21 +1,21 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { Avatar, Typography } from "@mui/material";
 import { logout } from "../../store/session";
 import { useDispatch } from "react-redux";
-import "./navbar.css"
-import { ClassNames } from "@emotion/react";
+import "./navbar.css";
+
 
 export default function ProfileDrawer() {
   const dispatch = useDispatch();
+  const user = useSelector(state=>state.session.user)
+  const firstAndLast= `${user.firstname} ${user.lastname}`
+
   const [state, setState] = React.useState({
     right: false,
   });
@@ -37,30 +37,33 @@ export default function ProfileDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: 250 }}
+      id="profile_drawer"
+      sx={{ width: 450 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-    //   onKeyDown={toggleDrawer(anchor, false)}
+      //   onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-          <p>{"Profile"}</p>
-        {/* {["Name", "Email"].map((text, index) => (
-          
-        ))} */}
-        <ListItem button>
-            {/* <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon> */}
-        <ListItemText primary="name" />
-          </ListItem>
+      <List id='profile_list'>
+        <Box id='profile_title'>
+          <Typography  variant="h3">Profile</Typography>
+        </Box>
+        <Box id="avatar_box"> 
+          <Avatar sx={{ width: 100, height: 100 }} src="https://www.wallpapers4u.org/wp-content/uploads/elijah_wood_actor_person_profile_brunette_smile_18910_1920x1080.jpg"/>
+          <Box>
+            <Typography  variant="h4">{firstAndLast}</Typography>
+            <Typography variant="h6">{user.email}</Typography>
+            <Typography variant="h6">{user.username}</Typography>
+          </Box>
+        </Box>
+        <Divider/>
       </List>
-      <Divider />
-      <div className="profile_buttons_box">
+
+      <Box className="profile_buttons_box">
         <Button variant="contained">Edit Profile</Button>
         <Button variant="contained" onClick={logUserOut}>
           Log Out
         </Button>
-      </div>
+      </Box>
     </Box>
   );
 

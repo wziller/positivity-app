@@ -30,9 +30,38 @@
 .login_form_button{
     background-color: blueviolet;
 }
+#profile_drawer{
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    padding-bottom:20px;
+}
+#profile_list{
+    width:100%;
+}
 
+#profile_title{
+    display:flex;
+    width:auto;
+    align-items: center;
+    justify-content: center;
+}
 
 .profile_buttons_box{
+    width:100%;
     display: flex;
     justify-content: space-evenly;
+}
+
+#avatar_box{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#avatar_box > *{
+    margin-left: 15px;
 }
