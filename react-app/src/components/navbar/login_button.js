@@ -6,36 +6,56 @@ import TextField from "@mui/material/TextField";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
+import "./navbar.css";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
+
 
 function SimpleDialog(props) {
-  const { onClose, selectedValue, open } = props;
+  const { onClose, open } = props;
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
-  const handleListItemClick = (value) => {
-    onClose(value);
+  const handleListItemClick = () => {
+    onClose();
   };
 
   return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Login Into Your Account</DialogTitle>
-      <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="filled-basic" label="Username" variant="filled" />
-        <TextField id="filled-basic" label="Password" variant="filled" />
-      </Box>
-    </Dialog>
+
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>Login Into Your Account</DialogTitle>
+        <Box
+          id='login_form'
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            required
+            id="username-input"
+            label="Username"
+          />
+          <TextField
+            required
+            id="password-input"
+            label="Password"
+            placeholder="Password"
+          />
+        </Box>
+        <Box id='login_buttons_box'>
+          <Button className='login_form_button' size='large' variant="contained" color='secondary'>
+            Login
+          </Button>
+          <Button className='login_form_button' size='large' variant="contained">
+            Cancel
+          </Button>
+        </Box>
+      </Dialog>
+
   );
 }
 
@@ -47,7 +67,6 @@ SimpleDialog.propTypes = {
 
 export default function LoginButton() {
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -55,20 +74,17 @@ export default function LoginButton() {
 
   const handleClose = (value) => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   return (
-    <div>
+    <div className='navbar_buttons'>
       <Typography variant="subtitle1" component="div">
-        Selected: {selectedValue}
       </Typography>
       <br />
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open simple dialog
+      <Button variant="contained" onClick={handleClickOpen}>
+        Login
       </Button>
       <SimpleDialog
-        selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
       />

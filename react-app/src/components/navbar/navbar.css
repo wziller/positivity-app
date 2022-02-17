@@ -1,7 +1,32 @@
 #navbar_container{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     width: 100vw;
     height:5vh;
+    background-color: blueviolet;
+    /* padding: 0em 2em 0em; */
+}
+
+#navbar_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#login_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login_buttons_box{
+    display: flex;
+    justify-content: space-evenly;
+    padding:10px;
+}
+
+.login_form_button{
     background-color: blueviolet;
 }

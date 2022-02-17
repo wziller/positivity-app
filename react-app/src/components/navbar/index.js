@@ -6,12 +6,14 @@ export default function NavBar() {
     const user = useSelector(state=> state.session.user)
   return (
     <div id='navbar_container'>
+      <div>
         {/* <Logo></Logo> */}
-        <div id="navbar_buttons">
-            {!user && <LoginButton/>}
-            {/* {!user && <SignUpButton/>}
-            {user && <ProfileButton/>} */}
-        </div>
+      </div>
+      <div id="navbar_buttons">
+          {!user && <LoginButton/>}
+          {/* {!user && <SignUpButton/>}
+          {user && <ProfileButton/>} */}
+      </div>
     </div>
   )
 }
