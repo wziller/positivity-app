@@ -8,6 +8,8 @@ import Divider from "@mui/material/Divider";
 import { Avatar, Typography } from "@mui/material";
 import { logout } from "../../store/session";
 import { useDispatch } from "react-redux";
+import {stringAvatar} from "../avatarFunctions";
+import stringToColor from "../avatarFunctions";
 import "./navbar.css";
 
 
@@ -35,6 +37,8 @@ export default function ProfileDrawer() {
     dispatch(logout());
   };
 
+
+//  ;
   const list = (anchor) => (
     <Box
       id="profile_drawer"
@@ -43,24 +47,40 @@ export default function ProfileDrawer() {
       onClick={toggleDrawer(anchor, false)}
       //   onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List id='profile_list'>
-        <Box id='profile_title'>
-          <Typography  variant="h3">Profile</Typography>
+      <List id="profile_list">
+        <Box id="profile_title">
+          <Typography variant="h3" >Profile</Typography>
         </Box>
         <Box id="avatar_box">
-          <Avatar sx={{ width: 100, height: 100 }} src="https://www.wallpapers4u.org/wp-content/uploads/elijah_wood_actor_person_profile_brunette_smile_18910_1920x1080.jpg"/>
+          {!user.avatar ? (
+            <Avatar
+              {...stringAvatar(firstAndLast)}
+              sx={{
+                width: 100,
+                height: 100,
+                bgcolor: stringToColor(firstAndLast),
+              }}
+            />
+          ) : (
+            <Avatar
+              sx={{ width: 100, height: 100 }}
+              src="https://www.wallpapers4u.org/wp-content/uploads/elijah_wood_actor_person_profile_brunette_smile_18910_1920x1080.jpg"
+            />
+          )}
           <Box>
-            <Typography  variant="h4">{firstAndLast}</Typography>
+            <Typography variant="h4">{firstAndLast}</Typography>
             <Typography variant="h6">{user.email}</Typography>
             <Typography variant="h6">{user.username}</Typography>
           </Box>
         </Box>
-        <Divider/>
+        <Divider />
       </List>
 
       <Box className="profile_buttons_box">
-        <Button variant="contained">Edit Profile</Button>
-        <Button variant="contained" onClick={logUserOut}>
+        <Button variant="contained" color="secondary">
+          Edit Profile
+        </Button>
+        <Button variant="contained" color="secondary" onClick={logUserOut}>
           Log Out
         </Button>
       </Box>
@@ -70,7 +90,11 @@ export default function ProfileDrawer() {
   return (
     <div>
       <React.Fragment>
-        <Button onClick={toggleDrawer("right", true)} variant="contained">
+        <Button
+          onClick={toggleDrawer("right", true)}
+          variant="contained"
+          color="secondary"
+        >
           {"Profile"}
         </Button>
         <Drawer
