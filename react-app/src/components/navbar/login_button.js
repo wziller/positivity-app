@@ -115,7 +115,7 @@ export default function LoginButton({ open, setLoginOpen, setSignUpOpen }) {
   };
 
   return (
-    <div className="navbar_buttons">
+    <Container disableGutters sx={{display:"flex", alignItems:"center", padding:"0px 10px",}}>
       <Typography variant="subtitle1" component="div"></Typography>
       <br />
       <Button variant="contained" color='secondary' onClick={handleClickOpen} sx={{width:'6rem', margin:'0px 5px 0px' }}>
@@ -126,6 +126,6 @@ export default function LoginButton({ open, setLoginOpen, setSignUpOpen }) {
         open={open}
         onClose={handleClose}
       />
-    </div>
+    </Container>
   );
 }

@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     firstName = db.Column(db.String(255), nullable=False)
     lastName = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False)
+    hashed_password = db.Column(db.String(255), nullable=False)
     avatar = db.Column(db.String(255), nullable=True)
 
     # Relationship
@@ -26,6 +26,8 @@ class User(db.Model, UserMixin):
         self.hashed_password = generate_password_hash(password)
 
     def check_password(self, password):
+        print("PASSWORD=====================>", password)
+        print("HASHEDPASSWORD=====================>", self.hashed_password)
         return check_password_hash(self.hashed_password, password)
 
     def to_dict(self):
@@ -35,7 +37,7 @@ class User(db.Model, UserMixin):
             'firstName':self.firstName,
             'lastName':self.lastName,
             'email':self.email,
-            'password':self.password,
+            'password':self.hashed_password,
             'avatar':self.avatar,
             'affirmations': [usersAffirmation.to_dict() for usersAffirmation in self.usersAffirmations]
             #  1 affirmation in list of affs

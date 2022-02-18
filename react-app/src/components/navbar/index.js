@@ -78,58 +78,21 @@ export default function NavBar() {
   //   );
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar sx={{display:'flex', justifyContent:'center'}}  position="static">
+      <Container sx={{display:'flex', justifyContent:'center', width:'100vw', margin: '0px',}}  >
+        <Toolbar disableGutters sx={{width:'80vw'}}>
           <img
             id="logo"
             src="https://consoul-log.s3.amazonaws.com/production-images/logo.png"
             alt="logo"
           ></img>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              // onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              // anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              // open={Boolean(anchorElNav)}
-              // onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            ></Menu>
-          </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
+          <Box >
               <Box
+              id='button_container'
              sx={{
-               display: { xs: "none", md: "flex" },
+               display: "flex",
                justifyContent: "space-between",
                alignItems: "center",
                width: "4 rem",
@@ -152,19 +115,6 @@ export default function NavBar() {
              )}
              {user && <ProfileDrawer />}
            </Box>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-            ></Menu>
           </Box>
         </Toolbar>
       </Container>

@@ -144,8 +144,8 @@ export default function SignUpButton({ setLoginOpen, setSignUpOpen, open}) {
   };
 
   return (
-    <div className="navbar_buttons">
-      <Typography variant="subtitle1" component="div"></Typography>
+    <Container disableGutters sx={{display:"flex", alignItems:"center", padding:"0px 10px",}}>
+      <Typography id="button_typography" variant="subtitle1" component="div" sx={{display:"flex", alignItems: 'start' }}></Typography>
       <br />
       <Button variant="contained" color='secondary' onClick={handleClickOpen} sx={{width:'6rem', margin:'0px 5px 0px' }}>
         Sign Up
@@ -155,6 +155,6 @@ export default function SignUpButton({ setLoginOpen, setSignUpOpen, open}) {
         open={open}
         onClose={handleClose}
       />
-    </div>
+    </Container>
   );
 }
