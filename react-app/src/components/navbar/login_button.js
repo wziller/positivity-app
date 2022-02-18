@@ -90,7 +90,7 @@ function SimpleDialog(props) {
         </Container>
         <Container>
           Become a member
-          <Button variant="text" onClick={LogInSignUpClick}>
+          <Button variant="text" color="secondary" onClick={LogInSignUpClick}>
             Sign Up!
           </Button>
         </Container>

@@ -37,7 +37,7 @@ function SimpleDialog(props) {
   }
 
   return (
-    <Dialog open={open} >
+    <Dialog open={open}>
       {/* <Backdrop
         sx={{ color: "primary", zIndex: (theme) => theme.zIndex.drawer - 1 }}
         open={open}
@@ -118,7 +118,7 @@ function SimpleDialog(props) {
         </Container>
         <Container>
           Already a member?
-          <Button variant="text" onClick={SignUpLogInClick}>
+          <Button variant="text" color="secondary" onClick={SignUpLogInClick}>
             Log In
           </Button>
         </Container>
