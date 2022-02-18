@@ -37,7 +37,7 @@ function SimpleDialog(props) {
   }
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} >
       {/* <Backdrop
         sx={{ color: "primary", zIndex: (theme) => theme.zIndex.drawer - 1 }}
         open={open}
@@ -48,7 +48,7 @@ function SimpleDialog(props) {
         id="login_form"
         component="form"
         sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
+          "& > :not(style)": { m: 1, width: "40ch" },
         }}
         noValidate
         autoComplete="off"
@@ -147,7 +147,7 @@ export default function SignUpButton({ setLoginOpen, setSignUpOpen, open}) {
     <div className="navbar_buttons">
       <Typography variant="subtitle1" component="div"></Typography>
       <br />
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" color='secondary' onClick={handleClickOpen} sx={{width:'6rem', margin:'0px 5px 0px' }}>
         Sign Up
       </Button>
       <SimpleDialog

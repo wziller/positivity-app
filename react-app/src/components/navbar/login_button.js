@@ -118,7 +118,7 @@ export default function LoginButton({ open, setLoginOpen, setSignUpOpen }) {
     <div className="navbar_buttons">
       <Typography variant="subtitle1" component="div"></Typography>
       <br />
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" color='secondary' onClick={handleClickOpen} sx={{width:'6rem', margin:'0px 5px 0px' }}>
         Login
       </Button>
       <SimpleDialog

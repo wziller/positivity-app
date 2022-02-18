@@ -14,6 +14,8 @@ export default function NavBar() {
   const user = useSelector((state) => state.session.user);
   const [loginOpen, setLoginOpen] = useState(false);
   const [signUpOpen, setSignUpOpen] = useState(false);
+
+  let buttonWidth = '8px'
   return (
     <AppBar position="static">
       <Container
@@ -31,7 +33,7 @@ export default function NavBar() {
         >
           LOGO
         </Typography>
-        <Box sx={{ flexGrow: 0 }}>
+        <Box sx={{display: { xs: "none", md: "flex" },justifyContent: "space-between", width:'4 rem' }}>
           {!user && (
             <LoginButton
               setSignUpOpen={setSignUpOpen}
