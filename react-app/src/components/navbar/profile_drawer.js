@@ -14,7 +14,7 @@ import "./navbar.css";
 export default function ProfileDrawer() {
   const dispatch = useDispatch();
   const user = useSelector(state=>state.session.user)
-  const firstAndLast= `${user.firstname} ${user.lastname}`
+  const firstAndLast= `${user.firstName} ${user.lastName}`
 
   const [state, setState] = React.useState({
     right: false,
@@ -47,7 +47,7 @@ export default function ProfileDrawer() {
         <Box id='profile_title'>
           <Typography  variant="h3">Profile</Typography>
         </Box>
-        <Box id="avatar_box"> 
+        <Box id="avatar_box">
           <Avatar sx={{ width: 100, height: 100 }} src="https://www.wallpapers4u.org/wp-content/uploads/elijah_wood_actor_person_profile_brunette_smile_18910_1920x1080.jpg"/>
           <Box>
             <Typography  variant="h4">{firstAndLast}</Typography>
