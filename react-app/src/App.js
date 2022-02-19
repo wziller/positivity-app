@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "./components/navbar";
 import { useEffect, useState } from "react";
 import { authenticate } from "./store/session";
+import LandingPage from "./components/landingPage";
+import MainPage from "./components/mainPage";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,9 +28,11 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path="/" exact={true}>
-          {/* {user ?  <MainPage/>:<LandingPage/>} */}
-        </Route>
+        <Route
+          path="/"
+          exact={true}
+          element={user ? <MainPage /> : <LandingPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

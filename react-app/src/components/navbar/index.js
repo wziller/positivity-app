@@ -22,61 +22,6 @@ export default function NavBar() {
     const [loginOpen, setLoginOpen] = useState(false);
     const [signUpOpen, setSignUpOpen] = useState(false);
 
-  //   return (
-  //     <AppBar
-  //       id="nav_bar"
-  //       position="static"
-  //       sx={{ width: "100vw", height: "fit-content" }}
-  //     >
-  //       <Container
-  //         maxWidth={false}
-  //         sx={{
-  //           maxWidth: "100%",
-  //           display: { xs: "none", md: "flex" },
-  //           justifyContent: "space-between",
-  //         }}
-  //       >
-  //         {/* <Container maxWidth={false} sx={{ width: "auto", margin: 0 }}> */}
-  //         <Typography></Typography>
-
-  //         <Typography
-  //           variant="h6"
-  //           noWrap
-  //           component="div"
-  //           sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-  //         >
-  //
-  //         </Typography>
-  //         {/* </Container> */}
-  //         <Box
-  //           sx={{
-  //             display: { xs: "none", md: "flex" },
-  //             justifyContent: "space-between",
-  //             alignItems: "center",
-  //             width: "4 rem",
-  //             height: "fit-content",
-  //           }}
-  //         >
-  //           {!user && (
-  //             <LoginButton
-  //               setSignUpOpen={setSignUpOpen}
-  //               setLoginOpen={setLoginOpen}
-  //               open={loginOpen}
-  //             />
-  //           )}
-  //           {!user && (
-  //             <SignUpButton
-  //               setSignUpOpen={setSignUpOpen}
-  //               setLoginOpen={setLoginOpen}
-  //               open={signUpOpen}
-  //             />
-  //           )}
-  //           {user && <ProfileDrawer />}
-  //         </Box>
-  //       </Container>
-  //     </AppBar>
-  //   );
-
   return (
     <AppBar sx={{display:'flex', justifyContent:'center'}}  position="static">
       <Container sx={{display:'flex', justifyContent:'center', width:'100vw', margin: '0px',}}  >
