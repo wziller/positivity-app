@@ -1,9 +1,11 @@
 import session from './session'
+import affirmations from './affirmations'
 import { applyMiddleware, compose, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     session,
+    affirmations
 })
 
 let enhancer;

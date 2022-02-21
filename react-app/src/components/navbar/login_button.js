@@ -24,7 +24,6 @@ function SimpleDialog(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(loginUser(userEmail, password));
   };
 
