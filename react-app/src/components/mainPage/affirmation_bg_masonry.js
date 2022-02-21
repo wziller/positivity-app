@@ -52,24 +52,27 @@ const PhotoOnly = (props) => {
           display: "block",
           width: "100%",
         }}
+        alt=""
       />
     </div>
   );
 };
 
-export default function AffirmationBgMasonry({affirmations}) {
+export default function AffirmationBgMasonry({ affirmations }) {
+
+    console.log("!!!!!!!!!!", affirmations)
   return affirmations ? (
-      <Box sx={{ width: "100vw", minHeight: 393 }}>
-        <Masonry columns={4} spacing={2}>
-          {affirmations.map((affirmation, index) =>
-            affirmation.image_url === "" ? (
-              <TextOnly affirmation={affirmation} index={index} />
-            ) : (
-              <PhotoOnly affirmation={affirmation} index={index} />
-            )
-          )}
-        </Masonry>
-      </Box>
+    <Box sx={{ width: "100vw", minHeight: 393 }}>
+      <Masonry columns={4} spacing={2}>
+        {affirmations.map((affirmation, index) =>
+          affirmation.image_url === "" ? (
+            <TextOnly affirmation={affirmation} index={index} />
+          ) : (
+            <PhotoOnly affirmation={affirmation} index={index} />
+          )
+        )}
+      </Masonry>
+    </Box>
   ) : (
     <p>Loading...</p>
   );

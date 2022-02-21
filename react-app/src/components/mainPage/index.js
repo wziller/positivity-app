@@ -2,20 +2,40 @@ import React from "react";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_all_affirmations } from "../../store/affirmations";
+import { getAllAffirmations } from "../../store/affirmations";
 import MainPageBg from "./main_page_bg";
+import { getRandomAffirmation } from "../../store/affirmations";
+import PhotoCard from "./photo_card";
+import TextCard from "./text_card";
 
 import "./main_page.css";
 export default function MainPage() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
+  //   const user = useSelector((state) => state.session.user);
+  const randomAffirmation = useSelector((state) => state.affirmations.random);
 
   useEffect(() => {
-    dispatch(get_all_affirmations(user.id));
+    dispatch(getAllAffirmations());
+    dispatch(getRandomAffirmation());
   }, []);
 
   return (
-    <div>
+    <div id="main_page_container">
+      {randomAffirmation.image_url === "" ? (
+        <TextCard randomAffirmation={randomAffirmation} />
+      ) : (
+        <PhotoCard
+          randomAffirmation={randomAffirmation}
+          sx={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+          }}
+        />
+      )}
       <MainPageBg id="main_page" />
     </div>
   );

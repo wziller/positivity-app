@@ -6,7 +6,7 @@ import AffirmationBgMasonry from "./affirmation_bg_masonry";
 //MUI Masonry Imports
 
 export default function MainPageBg() {
-  const { affirmations } = useSelector((state) => state.affirmations);
+  const affirmations  = useSelector((state) => state.affirmations.all);
   // let [displayElements, setDisplayElements] = useState([]);
   // if (affirmations)
   //     if (affirmations.length < 20) {

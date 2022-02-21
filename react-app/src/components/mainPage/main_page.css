@@ -3,6 +3,11 @@
     width:100vw;
     height:100vh;
     background-color:white;
-    z-index: 10;
-    opacity:.7;
+    opacity: .7;
+}
+
+
+#main_page_container{
+    width: "100vw";
+    height: "100vh";
 }
