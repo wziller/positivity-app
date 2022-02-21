@@ -39,6 +39,6 @@ class User(db.Model, UserMixin):
             'email':self.email,
             'password':self.hashed_password,
             'avatar':self.avatar,
-            'affirmations': [usersAffirmation.to_dict() for usersAffirmation in self.usersAffirmations]
+            # 'affirmations': [usersAffirmation.to_dict() for usersAffirmation in self.usersAffirmations]
             #  1 affirmation in list of affs
         }
