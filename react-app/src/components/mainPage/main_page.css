@@ -4,10 +4,20 @@
     height:100vh;
     background-color:white;
     opacity: .7;
+    
 }
 
 
 #main_page_container{
-    width: "100vw";
-    height: "100vh";
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative
+}
+
+#main_page_bg{
+    z-index: -10;
 }

@@ -21,22 +21,27 @@ export default function MainPage() {
 
   return (
     <div id="main_page_container">
-      {randomAffirmation.image_url === "" ? (
-        <TextCard randomAffirmation={randomAffirmation} />
-      ) : (
-        <PhotoCard
-          randomAffirmation={randomAffirmation}
-          sx={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-          }}
-        />
-      )}
-      <MainPageBg id="main_page" />
+      <div>
+        {randomAffirmation.image_url === "" ? (
+          <TextCard randomAffirmation={randomAffirmation} />
+        ) : (
+          <PhotoCard
+            randomAffirmation={randomAffirmation}
+            sx={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 0,
+              right: 0,
+              textAlign: "center",
+              zIndex: 10,
+            }}
+          />
+        )}
+        <button>Create New Affirmation</button>
+      </div>
+
+        <MainPageBg id="main_page_bg" />
     </div>
   );
 }

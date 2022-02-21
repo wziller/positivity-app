@@ -13,19 +13,16 @@ export default function PhotoCard({ randomAffirmation }) {
         minWidth: 275,
         maxWidth: 700,
         maxHeight: 300,
-    
-        zIndex: 10,
         justify: "center"
+        
       }}
     >
-      {/* distance from */}
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent>
           <Typography variant="h5" component="div">
             {`"${randomAffirmation.body}"`}
           </Typography>
         </CardContent>
-        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}></Box>
       </Box>
       <img src={randomAffirmation.image_url} alt=""></img>
     </Card>

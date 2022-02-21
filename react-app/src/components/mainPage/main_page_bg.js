@@ -27,8 +27,8 @@ export default function MainPageBg() {
   //   setDisplayElements(newDisplay)
   return affirmations ? (
     <div>
-      <div id="main_page_bg_shadow"></div>
-      <AffirmationBgMasonry affirmations={affirmations} />
+      {/* <div id="main_page_bg_shadow"></div>
+      <AffirmationBgMasonry affirmations={affirmations} /> */}
     </div>
   ) : (
     <div>Loading</div>
