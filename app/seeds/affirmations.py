@@ -1,5 +1,6 @@
 from app.models import db, Affirmation
 from datetime import datetime
+import random
 
 affirmation_bodies = ["Asking for help is a sign of self-respect and self-awareness.",
 "Changing my mind is a strength, not a weakness.",
@@ -152,6 +153,76 @@ affirmation_bodies = ["Asking for help is a sign of self-respect and self-awaren
 "I hold community for others, and am held in community by others.",
 ]
 
+images = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "https://images.unsplash.com/photo-1567578923208-5cc60003892d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG9zaXRpdmUlMjB0aGlua2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1617251137884-f135eccf6942?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zaXRpdmUlMjB0aGlua2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1549633030-89d0743bad01?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cG9zaXRpdmUlMjB0aGlua2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1579047917338-a6a69144fe63?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cG9zaXRpdmUlMjB0aGlua2luZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1516810714657-e654b97f1d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1507120410856-1f35574c3b45?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1528659432556-884cfe1480ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1603812079345-2fec46ae21b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1524293568345-75d62c3664f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1569852178898-9605dfd85b4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzJ8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1509909756405-be0199881695?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1487687944474-d9cf58dda287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1628342991714-f25774897322?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1517685633466-403d6955aeab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1516450137517-162bfbeb8dba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzN8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1581306145012-9c0958b872c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nzh8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1525439782176-7d7c4d6ff7f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODV8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTZ8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1579291465628-98115e927a42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTl8fHBvc2l0aXZlJTIwdGhpbmtpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1491234323906-4f056ca415bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTA1fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1521763041807-c5f24b03ade7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE0fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1619799131019-172979a4c266?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE1fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1641138604554-a6ed9843aa39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1632188494971-c0fb44320bc2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM3fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/reserve/Af0sF2OS5S5gatqrKzVP_Silhoutte.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTQzfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTUwfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1576341777523-73ea7c63f743?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTYxfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1615469751904-dc0a1e1c81be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTU4fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1621951809735-abe52375082f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTczfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1496360283198-431ee523ebda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTc5fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1610873245391-3c9cba91e33f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTgxfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1577297627665-432deebed1a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTk0fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1551232864-0b336dcdc028?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTkyfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1568219557405-376e23e4f7cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjE2fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1616952248800-9d62f964033c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI0fHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1509029032154-54ba8b3216d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjIzfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1642098290500-5b19c168ceee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjMxfHxwb3NpdGl2ZSUyMHRoaW5raW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+]
+
+def random_seeds (bodies, img_urls):
+    for body in bodies:
+        random_image_index = random.randint(0,len(img_urls) - 1)
+        img_url = img_urls[random_image_index]
+
+        new_affirmation = Affirmation(
+        body= body, image_url=img_url, viewed= False, user_id=1, created_at=datetime.now(), updated_at=datetime.now())
+
+        db.session.add(new_affirmation)
+        db.session.commit()
+
+
 def seed_affirmations():
     Affirmation1 = Affirmation(
         body="I am in the right place at the right time, doing the right thing", image_url='', viewed= False, user_id=1, created_at=datetime.now(), updated_at=datetime.now())
@@ -165,8 +236,9 @@ def seed_affirmations():
     db.session.add(Affirmation2)
     db.session.add(Affirmation3)
 
-    db.session.commit()
 
+    db.session.commit()
+    random_seeds(affirmation_bodies,images)
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this

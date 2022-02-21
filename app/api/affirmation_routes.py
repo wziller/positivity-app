@@ -18,10 +18,10 @@ def get_affirmations(id):
 
 
 # GET One Random Affirmation
-@affirmation_routes.route('/random/<int:id>')
-def get_random_affirmation(id):
+@affirmation_routes.route('/random/')
+def get_random_affirmation():
 
-    viewable_affirmations = list(Affirmation.query.filter(Affirmation.viewed == False and Affirmation.user_id == id))
+    viewable_affirmations = list(Affirmation.query.filter(Affirmation.viewed == False and Affirmation.user_id == current_user.id))
     if len(viewable_affirmations) == 0:
         affirmations = list(Affirmation.query.filter(Affirmation.user_id == id))
         for affirmation in affirmations:
