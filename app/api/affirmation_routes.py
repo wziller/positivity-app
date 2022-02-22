@@ -37,19 +37,21 @@ def get_random_affirmation():
 
 
 # POST One New Affirmation
-@affirmation_routes.route('/', methods=['POST'])
-def create_new_aff():
+@affirmation_routes.route('/<int:id>', methods=['POST'])
+def create_new_aff(id):
     form = NewAffForm()
+    print("hhhhhhhhhhhhhhhhhhhhhhtiiiiiiiiiiiiiititi", current_user)
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        new_aff = {
-            'body': form.data['body'],
-            'image_url': form.data['image_url'],
-            'viewed': False,
-            'created_at': datetime.now(),
-            'updated_at': datetime.now()
-        }
+        new_aff = Affirmation(
+            body = form.data['body'],
+            image_url = "",
+            viewed = False,
+            user_id= id,
+            created_at = datetime.datetime.now(),
+            updated_at = datetime.datetime.now()
+        )
         db.session.add(new_aff)
         db.session.commit()
         return new_aff.to_dict()
