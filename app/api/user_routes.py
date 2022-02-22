@@ -3,8 +3,6 @@ from flask_login import current_user
 from app.models import User, db
 from app.forms.user_signup_form import SignUpForm
 
-
-
 user_routes = Blueprint("users", __name__, url_prefix="/users")
 
 
@@ -41,5 +39,13 @@ def delete_user(id):
     db.session.commit()
     return "True", 201
 
+
+
+@user_routes.routes.route("/increment/<int:id>",  methods=["POST"])
+def increment_user_total(id):
+    user = User.query.get(id)
+    user.total_affirmations += 1
+    db.session.commit()
+    return user.to_dict()
 
 

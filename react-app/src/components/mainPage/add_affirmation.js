@@ -10,12 +10,16 @@ import { createNewAff } from "../../store/affirmations";
 import "./main_page.css";
 
 export default function NewAffirmationForm() {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [affirmation, setAffirmation] = useState('')
-  const dispatch = useDispatch()
-  const user = useSelector(state=>state.session.user)
+  const [affirmation, setAffirmation] = useState("");
+  const user = useSelector((state) => state.session.user);
+  const affirmations = useSelector((state) => state.affirmations.all);
 
-
+    affirmations?.filter((affirmation)=> {
+        console.log("AAAAANNNNNNNNNN", affirmation.created_at.split(" ").slice(1, 4).join(""));
+        return affirmation.createdAt
+    } )
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,15 +30,13 @@ export default function NewAffirmationForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const payload = {
-        body : affirmation,
-    }
-    console.log("hit======================>", payload)
-    dispatch(createNewAff(payload, user.id))
+      body: affirmation,
+    };
+    dispatch(createNewAff(payload, user.id));
     setOpen(false);
-  }
-
+  };
 
   return (
     <div>
@@ -46,7 +48,7 @@ export default function NewAffirmationForm() {
         open={open}
         onClose={handleClose}
         fullWidth={true}
-        maxWidth={'md'}
+        maxWidth={"md"}
       >
         <DialogTitle>What is the highlight of your day?</DialogTitle>
         <DialogContent>
@@ -62,7 +64,7 @@ export default function NewAffirmationForm() {
             variant="filled"
             color="secondary"
             value={affirmation}
-            onChange={(e)=>setAffirmation(e.target.value)}
+            onChange={(e) => setAffirmation(e.target.value)}
           />
         </DialogContent>
         <DialogActions>

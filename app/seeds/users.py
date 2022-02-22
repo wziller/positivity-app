@@ -5,11 +5,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 def seed_users():
     Demo = User(
-        username='Demo', firstName='Demo', lastName='Lition', email='demo@aa.io', hashed_password = generate_password_hash("password"), avatar="")
+        username='Demo', firstName='Demo', lastName='Lition', email='demo@aa.io', hashed_password = generate_password_hash("password"), avatar="", total_affirmations=0)
     Ann = User(
-        username='anndonnelly', firstName='Ann', lastName='Donnelly', email='donnelly.ann21@gmail.com', hashed_password = generate_password_hash("password"), avatar="")
+        username='anndonnelly', firstName='Ann', lastName='Donnelly', email='donnelly.ann21@gmail.com', hashed_password = generate_password_hash("password"), avatar="", total_affirmations=0)
     William = User(
-        username='wziller', firstName='William', lastName='Ziller', email='wziller@gmail.com', hashed_password = generate_password_hash("password"), avatar="")
+        username='wziller', firstName='William', lastName='Ziller', email='wziller@gmail.com', hashed_password = generate_password_hash("password"), avatar="", total_affirmations=0)
 
 
     db.session.add(Demo)

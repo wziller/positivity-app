@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     avatar = db.Column(db.String(255), nullable=True)
+    total_affirmations = db.Column(db.Integer, nullable=False)
 
     # Relationship
     usersAffirmations = db.relationship("Affirmation", back_populates="affirmationUser",  cascade="all, delete-orphan")
@@ -37,6 +38,7 @@ class User(db.Model, UserMixin):
             'email':self.email,
             'password':self.hashed_password,
             'avatar':self.avatar,
+            'total_affirmations' : self.total_affirmations
             # 'affirmations': [usersAffirmation.to_dict() for usersAffirmation in self.usersAffirmations]
             #  1 affirmation in list of affs
         }
