@@ -1,8 +1,14 @@
 const LOAD = "affirmation/LOAD";
+const ADD_ONE = "affirmation/ADD_ONE";
 const GET_RANDOM = "affirmation/GET_RANDOM";
 
 const load = (payload) => ({
   type: LOAD,
+  payload: payload,
+});
+
+const addOne = (payload) => ({
+  type: ADD_ONE,
   payload: payload,
 });
 
@@ -42,17 +48,40 @@ export const getRandomAffirmation = () => async (dispatch) => {
   }
 };
 
+export const createNewAff = (payload,userId) => async (dispatch) => {
+  console.log("PAYLOAD============================>", payload)
+  const response = await fetch(`api/affirmations/${userId}`, {
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json",
+
+    },
+    body: JSON.stringify( payload ),
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    dispatch(addOne(data));
+  }
+};
+
 const initialState = {
   all: [],
   random: {},
 };
 
 export default function reducer(state = initialState, action) {
+  let newState = {...state}
   switch (action.type) {
     case LOAD:
       return { ...state, ...action.payload };
     case GET_RANDOM:
       return { ...state, ...action.payload };
+    case ADD_ONE:
+      newState.all.push(action.payload)
+      return {...newState}
     default:
       return state;
   }

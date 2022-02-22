@@ -4,7 +4,7 @@
     height:100vh;
     background-color:white;
     opacity: .7;
-    
+
 }
 
 
@@ -20,4 +20,11 @@
 
 #main_page_bg{
     z-index: -10;
+}
+
+#new_affirmation_dialog_container{
+    display: flex;
+    width:100vw;
+    height:100vh;
+    position: absolute;
 }

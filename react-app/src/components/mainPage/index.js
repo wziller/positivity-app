@@ -7,6 +7,7 @@ import MainPageBg from "./main_page_bg";
 import { getRandomAffirmation } from "../../store/affirmations";
 import PhotoCard from "./photo_card";
 import TextCard from "./text_card";
+import NewAffirmationForm from "./add_affirmation";
 
 import "./main_page.css";
 export default function MainPage() {
@@ -38,10 +39,8 @@ export default function MainPage() {
             }}
           />
         )}
-        <button>Create New Affirmation</button>
+        <NewAffirmationForm />
       </div>
-
-        <MainPageBg id="main_page_bg" />
     </div>
   );
 }

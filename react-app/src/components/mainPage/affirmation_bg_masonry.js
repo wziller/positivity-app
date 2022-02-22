@@ -22,7 +22,6 @@ const TextItem = styled(Paper)(({ theme }) => ({
 
 const TextOnly = (props) => {
   const { affirmation, index } = props;
-  console.log(props);
 
   return (
     <TextItem key={index} sx={{ minWidth: 200 }}>
