@@ -41,11 +41,9 @@ def delete_user(id):
 
 
 
-@user_routes.routes.route("/increment/<int:id>",  methods=["POST"])
+@user_routes.route("/increment/<int:id>",  methods=["POST"])
 def increment_user_total(id):
     user = User.query.get(id)
     user.total_affirmations += 1
     db.session.commit()
     return user.to_dict()
-
-
