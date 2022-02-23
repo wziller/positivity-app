@@ -49,7 +49,7 @@ export const getRandomAffirmation = () => async (dispatch) => {
 };
 
 export const createNewAff = (payload,userId) => async (dispatch) => {
-  console.log("PAYLOAD============================>", payload)
+  
   const response = await fetch(`api/affirmations/${userId}`, {
     method:"POST",
     headers: {

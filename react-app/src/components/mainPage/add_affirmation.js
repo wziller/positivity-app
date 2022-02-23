@@ -1,5 +1,5 @@
-import React, { useState }  from "react";
-import {useDispatch, useSelector} from "react-redux"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { createNewAff } from "../../store/affirmations";
 import "./main_page.css";
+import { FormControlUnstyledContext } from "@mui/base";
 
 export default function NewAffirmationForm() {
   const dispatch = useDispatch();
@@ -15,11 +16,11 @@ export default function NewAffirmationForm() {
   const [affirmation, setAffirmation] = useState("");
   const user = useSelector((state) => state.session.user);
   const affirmations = useSelector((state) => state.affirmations.all);
+  let todayRaw = new Date(Date.now()).toString().split(" ");
+  let today = todayRaw[2] + todayRaw[1] + todayRaw[3];
+  let todaysAff = affirmations.filter((affirmation)=> affirmation.created_at.split(" ").slice(1, 4).join("") == today)
 
-    affirmations?.filter((affirmation)=> {
-        console.log("AAAAANNNNNNNNNN", affirmation.created_at.split(" ").slice(1, 4).join(""));
-        return affirmation.createdAt
-    } )
+  console.log(todaysAff)
 
   const handleClickOpen = () => {
     setOpen(true);
