@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,7 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { createNewAff } from "../../store/affirmations";
 import "./main_page.css";
-import { FormControlUnstyledContext } from "@mui/base";
+// import { FormControlUnstyledContext } from "@mui/base";
+import { Typography } from "@mui/material";
 
 export default function NewAffirmationForm() {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ export default function NewAffirmationForm() {
   const [affirmation, setAffirmation] = useState("");
   const user = useSelector((state) => state.session.user);
   const affirmations = useSelector((state) => state.affirmations.all);
-  let todayRaw = new Date(Date.now()).toString().split(" ");
+  let todayRaw = new Date(Date.now()).toString().split();
   let today = todayRaw[2] + todayRaw[1] + todayRaw[3];
-  let todaysAff = affirmations.filter((affirmation)=> affirmation.created_at.split(" ").slice(1, 4).join("") == today)
+  let todaysAff = affirmations.filter((affirmation)=> affirmation.created_at.split(" ").slice(1, 4).join("") === today)
+  const [postedAff, setPostedAff] = useState(todaysAff.length === 0);
 
-  console.log(todaysAff)
+
+  useEffect(() => {}, [affirmations]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,13 +40,21 @@ export default function NewAffirmationForm() {
     };
     dispatch(createNewAff(payload, user.id));
     setOpen(false);
+    setPostedAff(true);
   };
 
   return (
     <div>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
-        Add a new affirmation
-      </Button>
+      {!postedAff ? (
+        <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+          Add a new affirmation
+        </Button>
+      ) : (
+        <Typography>
+          Yay! You're Affirmation is posted! See you tomorrow
+        </Typography>
+      )}
+
       <Dialog
         id="vew_aff_dialog"
         open={open}
